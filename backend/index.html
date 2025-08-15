@@ -1,0 +1,31 @@
+<div style="width:400px;margin:20px auto;font-family:tahoma;">
+  <div id="chat-box" style="height:300px;border:1px solid #ccc;overflow:auto;padding:10px;background:#f8f9fa;border-radius:10px;"></div>
+  
+  <div style="margin-top:10px;display:flex;justify-content:space-between;">
+    <input type="text" id="username" placeholder="نام شما" style="flex:1;padding:5px;margin-right:5px;border-radius:5px;border:1px solid #ccc;">
+    <input type="text" id="message" placeholder="پیام..." style="flex:2;padding:5px;margin-right:5px;border-radius:5px;border:1px solid #ccc;">
+    <button onclick="sendMessage()" style="padding:5px 10px;border:none;border-radius:5px;background:#25d366;color:white;cursor:pointer;">ارسال</button>
+  </div>
+</div>
+
+<script>
+function sendMessage(){
+    var user = document.getElementById('username').value;
+    var msg = document.getElementById('message').value;
+    if(!user || !msg) return;
+    
+    var chatBox = document.getElementById('chat-box');
+    var messageDiv = document.createElement('div');
+    messageDiv.style.padding = '5px 10px';
+    messageDiv.style.margin = '5px 0';
+    messageDiv.style.background = '#dcf8c6';
+    messageDiv.style.borderRadius = '8px';
+    messageDiv.style.maxWidth = '80%';
+    messageDiv.innerHTML = '<b>'+user+'</b>: '+msg;
+    
+    chatBox.appendChild(messageDiv);
+    chatBox.scrollTop = chatBox.scrollHeight;
+    
+    document.getElementById('message').value = '';
+}
+</script>
