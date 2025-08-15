@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tickchat.db'
@@ -15,7 +16,7 @@ class Message(db.Model):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return "TickChat Backend is running."
 
 @app.route('/send', methods=['POST'])
 def send():
@@ -32,5 +33,6 @@ def messages():
     return jsonify(output)
 
 if __name__ == '__main__':
-    db.create_all()
-    app.run(debug=True)
+    if not os.path.exists('tickchat.db'):
+        db.create_all()
+    app.run(host='0.0.0.0', port=5000)
